@@ -9,7 +9,7 @@ from django.db.models import signals
 from django.utils.functional import curry
 from django.utils.translation import ugettext as _
 
-from unitology.app_settings import DATABASE_UNITS
+from app_settings import DATABASE_UNITS
 from utils import convert_weight, convert_length
 
 __all__ = ['WeightField', 'HeightField']
@@ -62,9 +62,9 @@ class WeightField(BaseField):
         setattr(cls, 'get_%s_display' % self.name, curry(cls._get_FIELD_display, field=self))
 
     def formfield(self, **kwargs):
-        from unitology import form_fields as forms
+        from unitology import formfields
 
-        defaults = {'form_class': forms.WeightMultiField}
+        defaults = {'form_class': formfields.WeightMultiField}
         defaults.update(kwargs)
         return super(WeightField, self).formfield(**defaults)
 
@@ -96,9 +96,9 @@ class HeightField(BaseField):
         setattr(cls, 'get_%s_display' % self.name, curry(cls._get_FIELD_display, field=self))
 
     def formfield(self, **kwargs):
-        from unitology import form_fields as forms
+        from unitology import formfields
 
-        defaults = {'form_class': forms.HeightMultiField}
+        defaults = {'form_class': formfields.HeightMultiField}
         defaults.update(kwargs)
         return super(HeightField, self).formfield(**defaults)
 

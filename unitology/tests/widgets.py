@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.test import TestCase
 
-from unitology.form_fields import *
+from unitology.formfields import *
 from unitology.widgets import *
 from unitology.variables import IMPERIAL, METRIC
 

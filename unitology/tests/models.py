@@ -6,7 +6,7 @@ from django_dynamic_fixture import N
 
 from unitology.models import UnitsFieldMixin
 from unitology.variables import IMPERIAL, METRIC
-from unitology.db_fields import WeightField, HeightField
+from unitology.fields import WeightField, HeightField
 
 
 class Model(UnitsFieldMixin):

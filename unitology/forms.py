@@ -4,7 +4,7 @@ from django import forms
 from django.conf import settings
 
 from models import UnitsFieldMixin
-from form_fields import BaseField, BaseMultiField
+from formfields import BaseField, BaseMultiField
 
 __all__ = ['UnitsFieldFormMixin']
 
