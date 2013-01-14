@@ -1,0 +1,36 @@
+{% load i18n %}
+<script type="text/javascript">
+(function($) {
+    $(document).bind("unitsChanged", function(event, to_units) {
+        if ($("#{{ id }}_1").val() !== to_units) {
+            $("#{{ id }}_1").val(to_units);
+            $("#{{ id }}_1").trigger("change");
+        }
+    });
+
+    $("#{{ id }}_1").live("change", function() {
+        var value = $("#{{ id }}_0").val();
+        
+        var to_units = $("#{{ id }}_1").val();
+        var from_units = (to_units !== "metric") ? "metric" : "imperial";
+
+        $.ajax({
+            type: 'GET',
+            data: {
+                'from_units': from_units, 
+                'to_units': to_units,
+                'id': '{{ id }}',
+                'name': '{{ name }}',
+                'value': value,
+                'module_name': '{{ module_name }}',
+                'klass_name': '{{ klass_name }}'
+            },
+            url: '{% url unitology_reload %}',
+            success: function(response) {
+                $("#{{ id }}_0").val($("#{{ id }}_0", response).val());
+            }
+        });
+    });
+})(jQuery || django.jQuery);
+</script>
+<span id="{{ id }}">{{ widget }}</span>
