@@ -1,0 +1,2 @@
+recursive-include unitology/static *
+recursive-include unitology/templates *
