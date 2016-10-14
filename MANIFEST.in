@@ -1,2 +1,5 @@
-recursive-include unitology/static *
-recursive-include unitology/templates *
+include AUTHORS
+include README.rst
+include LICENSE
+recursive-include unitology/static *.js
+recursive-include unitology/templates *.html
