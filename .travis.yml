@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.4"
+  - "2.7"
+  - "pypy"
+  - "pypy3"
+env:
+  - DJANGO_VERSION=1.4.2
+before_install:
+  - pip install -q django==$DJANGO_VERSION
+install:
+  - python setup.py develop
+script:
+  - python setup.py test
+matrix:
+  exclude:
+    - python: "3.4"
+      env: DJANGO_VERSION=1.4.2
