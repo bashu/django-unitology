@@ -2,19 +2,16 @@
 
 from django import forms
 from django.conf import settings
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 from .models import UnitsFieldMixin
 from .formfields import BaseField, BaseMultiField
-
-__all__ = ['UnitsFieldFormMixin']
 
 
 class UnitsFieldFormMixin(forms.ModelForm):
 
     class Media:
-        js = (
-            settings.STATIC_URL + 'unitology/js/units_change.js',
-            )
+        js = (staticfiles_storage.url('unitology/js/units_change.js'), )
 
     def __init__(self, *args, **kwargs):
         super(UnitsFieldFormMixin, self).__init__(*args, **kwargs)
