@@ -21,6 +21,7 @@ class ModelForm(UnitsFieldFormMixin):
 
     class Meta:
         model = ModelF
+        fields = ['weight', 'height']
 
 
 class UnitsFieldFormTest(TestCase):
