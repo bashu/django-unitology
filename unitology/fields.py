@@ -9,15 +9,13 @@ from django.db.models import signals
 from django.utils.functional import curry
 from django.utils.translation import ugettext as _
 
-from app_settings import DATABASE_UNITS
-from utils import convert_weight, convert_length
+from .app_settings import DATABASE_UNITS
+from .utils import convert_weight, convert_length
 
 __all__ = ['WeightField', 'HeightField']
 
 
 class BaseField(models.DecimalField):
-    __metaclass__ = models.SubfieldBase
-
     units = None
 
     def __init__(self, **kwargs):
@@ -105,5 +103,4 @@ class HeightField(BaseField):
 
 if 'south' in settings.INSTALLED_APPS:
     from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["^unitology\.fields\.WeightField"])
     add_introspection_rules([], ["^unitology\.fields\.HeightField"])

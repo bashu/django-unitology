@@ -11,7 +11,7 @@ from unitology.variables import IMPERIAL, METRIC
 from unitology.fields import WeightField, HeightField
 
 
-class Model(UnitsFieldMixin):
+class ModelF(UnitsFieldMixin):
 
     weight = WeightField(blank=True, null=True)
     height = HeightField(blank=True, null=True)
@@ -20,7 +20,8 @@ class Model(UnitsFieldMixin):
 class ModelForm(UnitsFieldFormMixin):
 
     class Meta:
-        model = Model
+        model = ModelF
+        fields = ['weight', 'height']
 
 
 class UnitsFieldFormTest(TestCase):
@@ -31,7 +32,7 @@ class UnitsFieldFormTest(TestCase):
         }
 
     def setUp(self):
-        self.model = N(Model, **self.model_info)
+        self.model = N(ModelF, **self.model_info)
 
     def test_default(self): # imperial is default
         form = ModelForm(instance=self.model)

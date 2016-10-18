@@ -9,7 +9,7 @@ from unitology.variables import IMPERIAL, METRIC
 from unitology.fields import WeightField, HeightField
 
 
-class Model(UnitsFieldMixin):
+class ModelM(UnitsFieldMixin):
 
     weight = WeightField(blank=True, null=True)
     height = HeightField(blank=True, null=True)
@@ -23,7 +23,7 @@ class UnitsFieldTest(TestCase):
         }
 
     def setUp(self):
-        self.model = N(Model, **self.model_info)
+        self.model = N(ModelM, **self.model_info)
 
     def test_default(self): # imperial is default
         self.assertEqual(self.model.units, IMPERIAL)

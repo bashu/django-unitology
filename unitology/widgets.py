@@ -8,8 +8,8 @@ from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from variables import IMPERIAL, METRIC
-from app_settings import DATABASE_UNITS
+from .variables import IMPERIAL, METRIC
+from .app_settings import DATABASE_UNITS
 
 __all__ = ['WeightWidget', 'WeightMultiWidget', 'HeightWidget', 'HeightMultiWidget',
            'LengthWidget', 'LengthMultiWidget', 'SecondsWidget', 'SecondsMultiWidget']
@@ -87,8 +87,8 @@ class HeightMultiWidget(BaseMultiWidget):
 
     def __init__(self, units, attrs=None):
         widgets = (
-            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in xrange(8, 2, -1)]), # feets
-            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in xrange(0, 12)]), # inches
+            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(8, 2, -1)]), # feets
+            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 12)]), # inches
             forms.TextInput(attrs=attrs), # value
             )
         super(HeightMultiWidget, self).__init__(units, widgets, attrs)
@@ -158,8 +158,8 @@ class LengthMultiWidget(HeightMultiWidget):
 
     def __init__(self, units, attrs=None):
         widgets = (
-            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in xrange(0, 40)]), # feets
-            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in xrange(0, 12)]), # inches
+            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 40)]), # feets
+            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 12)]), # inches
             forms.TextInput(attrs=attrs), # value
             )
         super(HeightMultiWidget, self).__init__(units, widgets, attrs)
@@ -189,7 +189,7 @@ class SecondsMultiWidget(BaseMultiWidget):
         if value:
             if isinstance(value, (list, tuple)):
                 return tuple(value)
-            return (str(int(value) / 60), str(int(value) % 60))
+            return (str(int(value) // 60), str(int(value) % 60))
         return (None, None)
 
     def format_output(self,rendered_widgets):

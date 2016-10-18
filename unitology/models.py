@@ -3,7 +3,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from variables import IMPERIAL, METRIC
+from .variables import IMPERIAL, METRIC
 
 __all__ = ['UnitsFieldMixin']
 
