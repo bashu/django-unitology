@@ -1,7 +1,8 @@
 django-unitology
 ================
 
-Authored by `Basil Shubin <https://github.com/bashu>`_
+Authored by `Basil Shubin <https://github.com/bashu>`_,  and some great
+`contributors <https://github.com/bashu/django-unitology/contributors>`_.
 
 .. image:: https://img.shields.io/pypi/v/django-unitology.svg
     :target: https://pypi.python.org/pypi/django-unitology/
