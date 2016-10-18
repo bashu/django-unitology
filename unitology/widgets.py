@@ -8,8 +8,8 @@ from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
+from .conf import settings
 from .variables import IMPERIAL, METRIC
-from .app_settings import DATABASE_UNITS
 
 __all__ = ['WeightWidget', 'WeightMultiWidget', 'HeightWidget', 'HeightMultiWidget',
            'LengthWidget', 'LengthMultiWidget', 'SecondsWidget', 'SecondsMultiWidget']
@@ -59,7 +59,7 @@ class WeightMultiWidget(BaseMultiWidget):
         if value:
             if isinstance(value, (list, tuple)):
                 return tuple(value)
-            return (str(self.form_class.conversion(value, DATABASE_UNITS, self.units)), self.units)
+            return (str(self.form_class.conversion(value, settings.UNITOLOGY_DATABASE_UNITS, self.units)), self.units)
         return (None, self.units)
 
     def render(self, name, value, attrs=None):
@@ -104,7 +104,7 @@ class HeightMultiWidget(BaseMultiWidget):
                 return tuple(value)
             try:
                 # rescale inches to feet and inches
-                q = float(self.form_class.conversion(value, DATABASE_UNITS, IMPERIAL)) * pq.inch 
+                q = float(self.form_class.conversion(value, settings.UNITOLOGY_DATABASE_UNITS, IMPERIAL)) * pq.inch 
                 return (int(q.rescale(pq.ft)), int(float((q.rescale(pq.ft) % pq.ft).rescale(pq.inch))), value)
             except TypeError:
                 pass

@@ -2,7 +2,7 @@
 
 from django.http import HttpResponse
 
-from .app_settings import DATABASE_UNITS
+from .conf import settings
 
 __all__ = ['reload']
 
@@ -29,7 +29,7 @@ def reload(request, *args, **kwargs):
         field = field_class(from_units, required=False)
         if value and from_units != to_units:
             value = field.conversion(value, from_units, to_units)
-            if from_units != DATABASE_UNITS:
+            if from_units != settings.UNITOLOGY_DATABASE_UNITS:
                 field.widget.units = to_units
         uid, name = request.GET.get('id'), request.GET.get('name')
         html = field.widget.render(name, value, attrs={'id': uid})

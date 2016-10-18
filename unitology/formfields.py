@@ -9,10 +9,10 @@ from django.core.exceptions import ValidationError
 from django.utils.encoding import smart_str
 from django.utils import formats
 
+from .conf import settings
 from .widgets import (
     WeightWidget, WeightMultiWidget, HeightWidget, LengthWidget,
     HeightMultiWidget, LengthMultiWidget, SecondsWidget, SecondsMultiWidget)
-from .app_settings import DATABASE_UNITS
 from .utils import convert_weight, convert_length
 
 
@@ -56,7 +56,7 @@ class BaseField(UnitsFieldMixin, forms.DecimalField):
             value = Decimal(value)
         except DecimalException:
             raise ValidationError(self.error_messages['invalid'])
-        return self.conversion(value, self.units, DATABASE_UNITS)
+        return self.conversion(value, self.units, settings.UNITOLOGY_DATABASE_UNITS)
 
 
 class BaseMultiField(UnitsFieldMixin, forms.MultiValueField):
@@ -104,7 +104,7 @@ class WeightMultiField(BaseMultiField):
     def compress(self, data_list):
         if data_list:
             if data_list[0]:
-                return self.conversion(data_list[0], data_list[1], DATABASE_UNITS)
+                return self.conversion(data_list[0], data_list[1], settings.UNITOLOGY_DATABASE_UNITS)
         return None
 
     @staticmethod
@@ -151,7 +151,7 @@ class HeightMultiField(BaseMultiField):
             if data_list[2]: # return centimeters as is
                 return Decimal(data_list[2])
             q = int(data_list[0]) * pq.ft # convert feet / inches into centimeters
-            return self.conversion(float(q.rescale(pq.inch) + float(data_list[1]) * pq.inch), self.units, DATABASE_UNITS)
+            return self.conversion(float(q.rescale(pq.inch) + float(data_list[1]) * pq.inch), self.units, settings.UNITOLOGY_DATABASE_UNITS)
         return None
 
     @staticmethod

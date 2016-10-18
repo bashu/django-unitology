@@ -39,6 +39,7 @@ setup(
 
     install_requires=[
         'quantities',
+        'django-appconf',
         'numpy',
     ],
     requires=[

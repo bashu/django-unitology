@@ -4,12 +4,11 @@ import decimal
 import quantities as pq
 
 from django.db import models
-from django.conf import settings
 from django.db.models import signals
 from django.utils.functional import curry
 from django.utils.translation import ugettext as _
 
-from .app_settings import DATABASE_UNITS
+from .conf import settings
 from .utils import convert_weight, convert_length
 
 __all__ = ['WeightField', 'HeightField']
@@ -48,8 +47,8 @@ class WeightField(BaseField):
             if isinstance(field, WeightField):
                 value = getattr(cls, field.attname)
                 if value:
-                    if cls.units != DATABASE_UNITS:
-                        weight = round(convert_weight(value, DATABASE_UNITS, cls.units), 2)
+                    if cls.units != settings.UNITOLOGY_DATABASE_UNITS:
+                        weight = round(convert_weight(value, settings.UNITOLOGY_DATABASE_UNITS, cls.units), 2)
                     else:
                         weight = value
                     return '%s %s' % (weight, {'metric': _('kgs'), 'imperial': _('lbs')}.get(cls.units))
@@ -80,8 +79,8 @@ class HeightField(BaseField):
             if isinstance(field, HeightField):
                 value = getattr(cls, field.attname)
                 if value:
-                    if cls.units != DATABASE_UNITS:
-                        value = round(convert_length(value, DATABASE_UNITS, cls.units), 2)
+                    if cls.units != settings.UNITOLOGY_DATABASE_UNITS:
+                        value = round(convert_length(value, settings.UNITOLOGY_DATABASE_UNITS, cls.units), 2)
                         q = float(value) * pq.inch # rescale inches to feet and inches
                         return _('%s ft %s in' % (
                             int(q.rescale(pq.ft)), int(float((q.rescale(pq.ft) % pq.ft).rescale(pq.inch)))))
