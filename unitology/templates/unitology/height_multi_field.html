@@ -15,7 +15,7 @@
                 'module_name': '{{ module_name }}',
                 'klass_name': '{{ klass_name }}'
             },
-            url: '{% url unitology_reload %}',
+            url: '{% url 'unitology_reload' %}',
             success: function(response) {
                 $("#{{ id }}_cm").val($("#{{ id }}_cm", response).val());
             }
@@ -36,7 +36,7 @@
                 'module_name': '{{ module_name }}',
                 'klass_name': '{{ klass_name }}'
             },
-            url: '{% url unitology_reload %}',
+            url: '{% url 'unitology_reload' %}',
             success: function(response) {
                 $("#{{ id }}_ft").val($("#{{ id }}_ft", response).val());
                 $("#{{ id }}_in").val($("#{{ id }}_in", response).val());
