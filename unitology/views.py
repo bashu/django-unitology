@@ -33,5 +33,5 @@ def reload(request, *args, **kwargs):
                 field.widget.units = to_units
         uid, name = request.GET.get('id'), request.GET.get('name')
         html = field.widget.render(name, value, attrs={'id': uid})
-        return HttpResponse(status=200, content=html, mimetype='text/html')
+        return HttpResponse(status=200, content=html, content_type='text/html')
     return HttpResponse(status=400)
