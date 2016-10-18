@@ -1,4 +1,7 @@
-from django.conf.urls.defaults import patterns, include, url
+try:
+    from django.conf.urls import patterns, include, url
+except ImportError:
+    from django.conf.urls.defaults import patterns, include, url
 
 # URL test patterns for unitology. Use this file to ensure a consistent
 # set of URL patterns are used when running unit tests. This test_urls
