@@ -11,9 +11,6 @@ from django.utils.translation import ugettext_lazy as _
 from .conf import settings
 from .variables import IMPERIAL, METRIC
 
-__all__ = ['WeightWidget', 'WeightMultiWidget', 'HeightWidget', 'HeightMultiWidget',
-           'LengthWidget', 'LengthMultiWidget', 'SecondsWidget', 'SecondsMultiWidget']
-
 
 class BaseWidget(forms.TextInput):
 
@@ -23,8 +20,8 @@ class BaseWidget(forms.TextInput):
 
     def render(self, name, value, attrs=None):
         return render_to_string(self.get_template_name(self.units), {
-                'widget': super(BaseWidget, self).render(name, value, attrs),
-                })
+            'widget': super(BaseWidget, self).render(name, value, attrs),
+        })
 
     def get_template_name(self, postfix=None):
         if postfix is not None:
@@ -50,11 +47,11 @@ class WeightMultiWidget(BaseMultiWidget):
 
     def __init__(self, units, attrs=None):
         widgets = (
-            forms.TextInput(attrs=attrs), # value
-            forms.Select(attrs=attrs, choices=((IMPERIAL, _("lbs")), (METRIC, _("kgs")))), # units
-            )
+            forms.TextInput(attrs=attrs),
+            forms.Select(attrs=attrs, choices=((IMPERIAL, _("lbs")), (METRIC, _("kgs")))),
+        )
         super(WeightMultiWidget, self).__init__(units, widgets, attrs)
-        
+
     def decompress(self, value):
         if value:
             if isinstance(value, (list, tuple)):
@@ -65,12 +62,12 @@ class WeightMultiWidget(BaseMultiWidget):
     def render(self, name, value, attrs=None):
         final_attrs = self.build_attrs(attrs)
         return render_to_string(self.template_name, {
-                'id': final_attrs.get('id', None),
-                'name': name,
-                'widget': super(WeightMultiWidget, self).render(name, value, attrs),
-                'module_name': str(self.form_class.__module__),
-                'klass_name': self.form_class.__name__,
-                })
+            'id': final_attrs.get('id', None),
+            'name': name,
+            'widget': super(WeightMultiWidget, self).render(name, value, attrs),
+            'module_name': str(self.form_class.__module__),
+            'klass_name': self.form_class.__name__,
+        })
 
     def format_output(self, rendered_widgets):
         return "%s&nbsp;%s" % (rendered_widgets[0], rendered_widgets[1])
@@ -87,10 +84,10 @@ class HeightMultiWidget(BaseMultiWidget):
 
     def __init__(self, units, attrs=None):
         widgets = (
-            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(8, 2, -1)]), # feets
-            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 12)]), # inches
-            forms.TextInput(attrs=attrs), # value
-            )
+            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(8, 2, -1)]),
+            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 12)]),
+            forms.TextInput(attrs=attrs),
+        )
         super(HeightMultiWidget, self).__init__(units, widgets, attrs)
 
         if not self.is_required:
@@ -104,7 +101,7 @@ class HeightMultiWidget(BaseMultiWidget):
                 return tuple(value)
             try:
                 # rescale inches to feet and inches
-                q = float(self.form_class.conversion(value, settings.UNITOLOGY_DATABASE_UNITS, IMPERIAL)) * pq.inch 
+                q = float(self.form_class.conversion(value, settings.UNITOLOGY_DATABASE_UNITS, IMPERIAL)) * pq.inch
                 return (int(q.rescale(pq.ft)), int(float((q.rescale(pq.ft) % pq.ft).rescale(pq.inch))), value)
             except TypeError:
                 pass
@@ -139,14 +136,13 @@ class HeightMultiWidget(BaseMultiWidget):
             'widget': mark_safe(self.format_output(output)),
             'module_name': str(self.form_class.__module__),
             'klass_name': self.form_class.__name__,
-            })
+        })
 
     def format_output(self, rendered_widgets):
         return "%s ft %s in or %s cm" % (rendered_widgets[0], rendered_widgets[1], rendered_widgets[2])
 
     def value_from_datadict(self, data, files, name):
-        return [widget.value_from_datadict(data, files, name + '_%s' % i) \
-                    for i, widget in zip(['ft', 'in', 'cm'], self.widgets)]
+        return [w.value_from_datadict(data, files, name + '_%s' % i) for i, w in zip(['ft', 'in', 'cm'], self.widgets)]
 
 
 class LengthWidget(HeightWidget):
@@ -158,10 +154,10 @@ class LengthMultiWidget(HeightMultiWidget):
 
     def __init__(self, units, attrs=None):
         widgets = (
-            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 40)]), # feets
-            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 12)]), # inches
-            forms.TextInput(attrs=attrs), # value
-            )
+            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 40)]),
+            forms.Select(attrs=attrs, choices=[(v, str(v)) for v in range(0, 12)]),
+            forms.TextInput(attrs=attrs),
+        )
         super(HeightMultiWidget, self).__init__(units, widgets, attrs)
 
 
@@ -177,7 +173,7 @@ class SecondsWidget(BaseWidget):
 
 class SecondsMultiWidget(BaseMultiWidget):
     template_name = 'unitology/seconds_ext_field.html'
-    
+
     def __init__(self, units=None, attrs=None):
         widgets = (
             forms.TextInput(attrs={'maxlength': 2}),
@@ -192,7 +188,7 @@ class SecondsMultiWidget(BaseMultiWidget):
             return (str(int(value) // 60), str(int(value) % 60))
         return (None, None)
 
-    def format_output(self,rendered_widgets):
+    def format_output(self, rendered_widgets):
         return render_to_string(self.template_name, {
-                'widget': rendered_widgets,
-                })
+            'widget': rendered_widgets,
+        })
