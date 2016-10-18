@@ -16,8 +16,6 @@ __all__ = ['WeightField', 'HeightField']
 
 
 class BaseField(models.DecimalField):
-    __metaclass__ = models.SubfieldBase
-
     units = None
 
     def __init__(self, **kwargs):
@@ -105,5 +103,4 @@ class HeightField(BaseField):
 
 if 'south' in settings.INSTALLED_APPS:
     from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["^unitology\.fields\.WeightField"])
     add_introspection_rules([], ["^unitology\.fields\.HeightField"])

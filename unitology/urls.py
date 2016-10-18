@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 try:
-    from django.conf.urls import patterns, include, url
+    from django.conf.urls import include, url
 except ImportError:
-    from django.conf.urls.defaults import patterns, include, url
+    from django.conf.urls.defaults import include, url
 
-urlpatterns = patterns('unitology.views',
-    url(r'^reload/$', 'reload', name='unitology_reload'),
-)
+from . import views
+
+urlpatterns = [
+    url(r'^reload/$', views.reload, name='unitology_reload'),
+]
