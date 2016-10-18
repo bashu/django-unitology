@@ -9,8 +9,8 @@ from django.db.models import signals
 from django.utils.functional import curry
 from django.utils.translation import ugettext as _
 
-from app_settings import DATABASE_UNITS
-from utils import convert_weight, convert_length
+from .app_settings import DATABASE_UNITS
+from .utils import convert_weight, convert_length
 
 __all__ = ['WeightField', 'HeightField']
 

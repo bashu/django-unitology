@@ -9,11 +9,11 @@ from django.core.exceptions import ValidationError
 from django.utils.encoding import smart_str
 from django.utils import formats
 
-from widgets import (
+from .widgets import (
     WeightWidget, WeightMultiWidget, HeightWidget, LengthWidget,
     HeightMultiWidget, LengthMultiWidget, SecondsWidget, SecondsMultiWidget)
-from app_settings import DATABASE_UNITS
-from utils import convert_weight, convert_length
+from .app_settings import DATABASE_UNITS
+from .utils import convert_weight, convert_length
 
 
 __all__ = ['WeightField', 'WeightMultiField', 'HeightField', 'HeightMultiField', 

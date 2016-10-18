@@ -3,8 +3,8 @@
 from django import forms
 from django.conf import settings
 
-from models import UnitsFieldMixin
-from formfields import BaseField, BaseMultiField
+from .models import UnitsFieldMixin
+from .formfields import BaseField, BaseMultiField
 
 __all__ = ['UnitsFieldFormMixin']
 

@@ -2,7 +2,7 @@
 
 from django.http import HttpResponse
 
-from app_settings import DATABASE_UNITS
+from .app_settings import DATABASE_UNITS
 
 __all__ = ['reload']
 
@@ -21,7 +21,7 @@ def reload(request, *args, **kwargs):
 
         if 'value[]' in request.GET.keys():
             value = request.GET.getlist('value[]')
-            for idx in xrange(0, len(value)): # fix list of values...
+            for idx in range(0, len(value)): # fix list of values...
                 if not value[idx]: value[idx] = str(0) 
         else:
             value = request.GET.get('value', None)
