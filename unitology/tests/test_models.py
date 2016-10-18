@@ -20,12 +20,12 @@ class UnitsFieldTest(TestCase):
     model_info = {
         'weight': 66,
         'height': 175,
-        }
+    }
 
     def setUp(self):
         self.model = N(ModelM, **self.model_info)
 
-    def test_default(self): # imperial is default
+    def test_default(self):  # imperial is default
         self.assertEqual(self.model.units, IMPERIAL)
         self.assertEqual(self.model.get_height_display(), '5 ft 8 in')
         self.assertEqual(self.model.get_weight_display(), '145.51 lbs')

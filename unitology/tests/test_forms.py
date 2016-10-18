@@ -29,12 +29,12 @@ class UnitsFieldFormTest(TestCase):
     model_info = {
         'weight': 66,
         'height': 175,
-        }
+    }
 
     def setUp(self):
         self.model = N(ModelF, **self.model_info)
 
-    def test_default(self): # imperial is default
+    def test_default(self):  # imperial is default
         form = ModelForm(instance=self.model)
         self.assertTrue('145.51' in form.as_p() and '"%s" selected' % IMPERIAL in form.as_p())
 
@@ -59,7 +59,7 @@ class UnitsFieldFormTest(TestCase):
             'weight_1': 'imperial',
             'height_ft': '5',
             'height_in': '8',
-            }
+        }
         form = ModelForm(data=data, instance=self.model)
         self.failUnless(form.is_valid())
 
