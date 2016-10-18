@@ -15,9 +15,9 @@ class ReloadViewTest(TestCase):
             'id': 'id_weight',
             'name': 'weight',
             'value': '220',
-            'module_name': 'unitology.form_fields',
+            'module_name': 'unitology.formfields',
             'klass_name': 'WeightMultiField'
-            }
+        }
 
         response = self.client.get(reverse('unitology_reload'), data, **{
                 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'})
@@ -30,9 +30,9 @@ class ReloadViewTest(TestCase):
             'id': 'id_weight',
             'name': 'weight',
             'value': '100',
-            'module_name': 'unitology.form_fields',
+            'module_name': 'unitology.formfields',
             'klass_name': 'WeightMultiField'
-            }
+        }
 
         response = self.client.get(reverse('unitology_reload'), data, **{
                 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'})
@@ -46,9 +46,9 @@ class ReloadViewTest(TestCase):
             'id': 'id_weight',
             'name': 'weight',
             'value': 'qwetry',
-            'module_name': 'unitology.form_fields',
+            'module_name': 'unitology.formfields',
             'klass_name': 'WeightMultiField'
-            }
+        }
 
         response = self.client.get(reverse('unitology_reload'), data, **{
                 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'})
@@ -62,9 +62,9 @@ class ReloadViewTest(TestCase):
             'id': 'id_height',
             'name': 'height',
             'value[]': ['5', '8'],
-            'module_name': 'unitology.form_fields',
+            'module_name': 'unitology.formfields',
             'klass_name': 'HeightMultiField'
-            }
+        }
 
         response = self.client.get(reverse('unitology_reload'), data, **{
                 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'})
@@ -77,9 +77,9 @@ class ReloadViewTest(TestCase):
             'id': 'id_height',
             'name': 'height',
             'value': '175',
-            'module_name': 'unitology.form_fields',
+            'module_name': 'unitology.formfields',
             'klass_name': 'HeightMultiField'
-            }
+        }
 
         response = self.client.get(reverse('unitology_reload'), data, **{
                 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'})
@@ -94,13 +94,12 @@ class ReloadViewTest(TestCase):
             'id': 'id_height',
             'name': 'height',
             'value[]': 'qwerty',
-            'module_name': 'unitology.form_fields',
+            'module_name': 'unitology.formfields',
             'klass_name': 'HeightMultiField'
-            }
+        }
 
         response = self.client.get(reverse('unitology_reload'), data, **{
                 'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('0' in response.content and 'ft' in response.content)
         self.assertTrue('0' in response.content and 'in' in response.content)
-
