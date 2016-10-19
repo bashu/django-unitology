@@ -1,14 +1,13 @@
-{% load i18n %}
-{% load url from compat %}
+{% load url from compat %}{% spaceless %}
 <script type="text/javascript">
 (function($) {
-    $("#{{ id }}_ft, #{{ id }}_in").live("change", function() {
+    $(document).on("change", "#{{ id }}_ft, #{{ id }}_in", function() {
         var value = new Array($("#{{ id }}_ft").val(), $("#{{ id }}_in").val());
 
         $.ajax({
             type: 'GET',
             data: {
-                'from_units': 'imperial', 
+                'from_units': 'imperial',
                 'to_units': 'metric',
                 'id': '{{ id }}',
                 'name': '{{ name }}',
@@ -23,13 +22,13 @@
         });
     });
 
-    $("#{{ id }}_cm").live("change", function() {
+    $(document).on("change", "#{{ id }}_cm", function() {
         var value = $("#{{ id }}_cm").val();
 
         $.ajax({
             type: 'GET',
             data: {
-                'from_units': 'metric', 
+                'from_units': 'metric',
                 'to_units': 'metric',
                 'id': '{{ id }}',
                 'name': '{{ name }}',
@@ -47,3 +46,4 @@
 })(jQuery || django.jQuery);
 </script>
 <span id="{{ id }}">{{ widget }}</span>
+{% endspaceless %}
