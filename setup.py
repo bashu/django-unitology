@@ -38,8 +38,8 @@ setup(
     license='MIT License',
 
     install_requires=[
-        'quantities',
         'django-appconf',
+        'quantities',
         'numpy',
     ],
     requires=[
