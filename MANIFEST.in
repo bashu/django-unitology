@@ -1,6 +1,7 @@
 include AUTHORS
 include README.rst
 include LICENSE
+recursive-exclude unitology/tests *
 recursive-include unitology/locale *.mo
 recursive-include unitology/static *.js
 recursive-include unitology/templates *.html
