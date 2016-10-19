@@ -51,6 +51,43 @@ When deploying on production server, don't forget to run:
 Usage
 -----
 
+.. code-block:: python
+
+    # models.py
+
+    from django.db import models
+    from django.contrib import admin
+
+    from unitology.models import UnitsFieldMixin
+    from unitology.fields import WeightField, HeightField
+    from unitology.forms import UnitsFieldFormMixin
+
+
+    class Person(UnitsFieldMixin):
+
+        name = models.CharField(max_length=128)
+
+        weight = WeightField(blank=True, null=True)
+        height = HeightField(blank=True, null=True)
+
+
+    class PersonChangeForm(UnitsFieldFormMixin):
+
+        class Meta:
+            model = Person
+
+
+    class PersonAdmin(admin.ModelAdmin):
+        form = PersonChangeForm
+
+
+    admin.site.register(Person, PersonAdmin)
+
+Please see ``example`` application. This application is used to manually test the functionalities of this package. This also serves as a good example.
+
+You need only Django 1.4 or above to run that. It might run on older versions but that is not tested.
+
+
 License
 -------
 
