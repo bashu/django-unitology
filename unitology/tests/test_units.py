@@ -5,6 +5,7 @@ from django.test import TestCase
 from unitology import utils
 from unitology.variables import IMPERIAL, METRIC
 
+
 class UtilsTest(TestCase):
 
     def test_kg2lb(self):
@@ -26,4 +27,3 @@ class UtilsTest(TestCase):
     def test_convert_length(self):
         self.assertEqual(round(utils.convert_length(175, METRIC, IMPERIAL), 1), 68.9)
         self.assertEqual(round(utils.convert_length(68.9, IMPERIAL, METRIC), 1), 175.0)
-        

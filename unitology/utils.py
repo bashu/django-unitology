@@ -4,26 +4,24 @@ import quantities as pq
 
 from unitology import variables as units
 
-__all__ = ['kg2lb', 'lb2kg', 'cm2in', 'in2cm', 'convert_weight', 'convert_length']
-
 
 def kg2lb(value):
-    q = float(value) * pq.kg # rescale kgs to lbs
+    q = float(value) * pq.kg  # rescale kgs to lbs
     return float(q.rescale(pq.lb))
 
 
 def lb2kg(value):
-    q = float(value) * pq.lb # rescale lbs to kgs
+    q = float(value) * pq.lb  # rescale lbs to kgs
     return float(q.rescale(pq.kg))
 
 
 def cm2in(value):
-    q = float(value) * pq.cm # rescale cms to inches
+    q = float(value) * pq.cm  # rescale cms to inches
     return float(q.rescale(pq.inch))
 
 
 def in2cm(value):
-    q = float(value) * pq.inch # rescale inches to cms
+    q = float(value) * pq.inch  # rescale inches to cms
     return float(q.rescale(pq.cm))
 
 

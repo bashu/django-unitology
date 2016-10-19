@@ -5,8 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from .variables import IMPERIAL, METRIC
 
-__all__ = ['UnitsFieldMixin']
-
 
 class UnitsFieldMixin(models.Model):
 
@@ -16,8 +14,10 @@ class UnitsFieldMixin(models.Model):
         (METRIC, _("Metric (kg/cm)")),
     )
 
-    units = models.CharField(max_length=12, choices=UNITS, default=DEFAULT,
-                             help_text=_("User specific system of measurements..."))
+    units = models.CharField(
+        max_length=12, choices=UNITS, default=DEFAULT,
+        help_text=_("User specific system of measurements..."),
+    )
 
     class Meta:
         abstract = True

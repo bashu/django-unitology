@@ -77,7 +77,7 @@ class HeightMultiFieldTest(TestCase):
         response = self.field.widget.render('height', [5, 8, '175'], {'id': 'id_height'})
         self.assertTrue('5' in response and 'ft' in response)
         self.assertTrue('8' in response and 'in' in response)
-        
+
         self.assertEqual(self.field.compress([5, 8, None]), Decimal('172.72'))
 
     def test_metric_field(self):
