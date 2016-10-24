@@ -144,6 +144,12 @@ class HeightMultiWidget(BaseMultiWidget):
     def value_from_datadict(self, data, files, name):
         return [w.value_from_datadict(data, files, name + '_%s' % i) for i, w in zip(['ft', 'in', 'cm'], self.widgets)]
 
+    def value_omitted_from_data(self, data, files, name):
+        for n in [name + '_%s' % i for i in ('ft', 'in', 'cm')]:
+            if n not in data:
+                return True
+        return False
+
 
 class LengthWidget(HeightWidget):
     template_name = 'unitology/length_field.html'
