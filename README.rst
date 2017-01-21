@@ -42,6 +42,14 @@ Add ``unitology`` to  ``INSTALLED_APPS``:
         'unitology',
     )
 
+Update your ``urls.py`` file:
+
+.. code-block:: python
+
+    urlpatterns += [
+        url(r'^unitology/', include('unitology.urls')),
+    ]
+
 When deploying on production server, don't forget to run:
 
 .. code-block:: shell
