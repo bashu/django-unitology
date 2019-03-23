@@ -59,6 +59,7 @@ class UnitsFieldFormTest(TestCase):
             'weight_1': 'imperial',
             'height_ft': '5',
             'height_in': '8',
+            'height_cm': '',  # empty field
         }
         form = ModelForm(data=data, instance=self.model)
         self.failUnless(form.is_valid())
