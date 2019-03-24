@@ -18,6 +18,12 @@ Authored by `Basil Shubin <https://github.com/bashu>`_,  and some great
 .. image:: https://img.shields.io/travis/bashu/django-unitology.svg
     :target: https://travis-ci.org/bashu/django-unitology/
 
+.. raw:: html
+
+    <p align="center">
+        <img src="https://raw.githubusercontent.com/bashu/django-unitology/develop/showcase.gif">
+    </p>
+
 Installation
 ------------
 
