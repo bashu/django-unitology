@@ -1,7 +1,7 @@
 django-unitology
 ================
 
-Custom model fields to store, retrieve and convert measurements of height, weight and more.
+Custom model fields to store, retrieve and convert measurements of height, weight and more...
 
 Authored by `Basil Shubin <https://github.com/bashu>`_,  and some great
 `contributors <https://github.com/bashu/django-unitology/contributors>`_.
