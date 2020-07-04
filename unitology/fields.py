@@ -2,12 +2,13 @@
 
 import decimal
 import quantities as pq
+from functools import partialmethod
 
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext as _
 
-from .compat import curry
+
 from .conf import settings
 from .utils import convert_weight, convert_length
 
@@ -58,7 +59,7 @@ class WeightField(BaseField):
             return super(self.model, cls)._get_FIELD_display(field)
         setattr(cls, '_get_FIELD_display', _get_FIELD_display)
 
-        setattr(cls, 'get_%s_display' % self.name, curry(cls._get_FIELD_display, field=self))
+        setattr(cls, 'get_%s_display' % self.name, partialmethod(cls._get_FIELD_display, field=self))
 
     def formfield(self, **kwargs):
         from unitology import formfields
@@ -94,7 +95,7 @@ class HeightField(BaseField):
             return super(self.model, cls)._get_FIELD_display(field)
         setattr(cls, '_get_FIELD_display', _get_FIELD_display)
 
-        setattr(cls, 'get_%s_display' % self.name, curry(cls._get_FIELD_display, field=self))
+        setattr(cls, 'get_%s_display' % self.name, partialmethod(cls._get_FIELD_display, field=self))
 
     def formfield(self, **kwargs):
         from unitology import formfields
