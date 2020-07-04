@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.test import TestCase
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 from unitology.variables import IMPERIAL, METRIC
 
