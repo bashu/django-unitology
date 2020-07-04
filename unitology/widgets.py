@@ -18,9 +18,9 @@ class BaseWidget(forms.TextInput):
         super(BaseWidget, self).__init__(*args, **kwargs)
         self.units = units
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         return render_to_string(self.get_template_name(self.units), {
-            'widget': super(BaseWidget, self).render(name, value, attrs),
+            'widget': super(BaseWidget, self).render(name, value, attrs, renderer),
         })
 
     def get_template_name(self, postfix=None):
@@ -59,7 +59,7 @@ class WeightMultiWidget(BaseMultiWidget):
             return (str(self.form_class.conversion(value, settings.UNITOLOGY_DATABASE_UNITS, self.units)), self.units)
         return (None, self.units)
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if self.is_localized:
             for widget in self.widgets:
                 widget.is_localized = self.is_localized
@@ -78,7 +78,7 @@ class WeightMultiWidget(BaseMultiWidget):
                 widget_value = None
             if id_:
                 final_attrs = dict(final_attrs, id='%s_%s' % (id_, i))
-            output.append(widget.render(name + '_%s' % i, widget_value, final_attrs))
+            output.append(widget.render(name + '_%s' % i, widget_value, final_attrs, renderer))
 
         return render_to_string(self.template_name, {
             'id': id_,
@@ -126,7 +126,7 @@ class HeightMultiWidget(BaseMultiWidget):
                 pass
         return (None, None, None)
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if self.is_localized:
             for widget in self.widgets:
                 widget.is_localized = self.is_localized
@@ -146,7 +146,7 @@ class HeightMultiWidget(BaseMultiWidget):
                 widget_value = None
             if id_:
                 final_attrs = dict(final_attrs, id='%s_%s' % (id_, i))
-            output.append(widget.render(name + '_%s' % i, widget_value, final_attrs))
+            output.append(widget.render(name + '_%s' % i, widget_value, final_attrs, renderer))
             index += 1
 
         return render_to_string(self.template_name, {
@@ -213,7 +213,7 @@ class SecondsMultiWidget(BaseMultiWidget):
             return (str(int(value) // 60), str(int(value) % 60))
         return (None, None)
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if self.is_localized:
             for widget in self.widgets:
                 widget.is_localized = self.is_localized
@@ -231,7 +231,7 @@ class SecondsMultiWidget(BaseMultiWidget):
                 widget_value = None
             if id_:
                 final_attrs = dict(final_attrs, id='%s_%s' % (id_, i))
-            output.append(widget.render(name + '_%s' % i, widget_value, final_attrs))
+            output.append(widget.render(name + '_%s' % i, widget_value, final_attrs, renderer))
         return mark_safe(self.format_output(output))
 
     def format_output(self, rendered_widgets):

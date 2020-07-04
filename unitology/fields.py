@@ -5,9 +5,9 @@ import quantities as pq
 
 from django.db import models
 from django.db.models import signals
-from django.utils.functional import curry
 from django.utils.translation import ugettext as _
 
+from .compat import curry
 from .conf import settings
 from .utils import convert_weight, convert_length
 
