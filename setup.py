@@ -47,7 +47,7 @@ setup(
     ],
 
     description="Height / Weight fields for Django models & forms with unit conversion",
-    long_description=read('README.rst'),
+    long_description=read('PYPIREADME.rst'),
 
     author='Basil Shubin',
     author_email='basil.shubin@gmail.com',
